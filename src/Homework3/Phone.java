@@ -4,7 +4,6 @@ public class Phone {
     private long number;
     private int model;
     private int weight;
-    private String name = "Alex";
 
     public Phone(){}
 
@@ -48,10 +47,8 @@ public class Phone {
         System.out.printf("Number: %d \nModel: %d \nWeight: %d \n", number,model,weight);
     }
 
-    public String receiveCall(String name) {
-        String result = "Звонит " + name;
-        System.out.println(result);
-        return result;
+    public void receiveCall (String name){
+        System.out.printf("Звонит: %s \n" , name);
     }
 
     }
