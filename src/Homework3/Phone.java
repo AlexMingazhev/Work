@@ -44,7 +44,7 @@ public class Phone {
     }
 
     void info(){
-        System.out.printf("Number: %d \nModel: %d \nWeight: %d \n", number,model,weight);
+        System.out.printf("Number: %d \nModel: %d \nWeight: %d \n\n", number,model,weight);
     }
 
     public void receiveCall (String name){
