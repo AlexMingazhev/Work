@@ -8,9 +8,7 @@ public class SingleClubMember extends Member{
     }
     @Override
     public String toString() {
-        return "SingleClubMember{" +
-                "club=" + club +
-                '}';
+        return super.toString() + "," + club;
     }
     public int getClub() {
         return club;

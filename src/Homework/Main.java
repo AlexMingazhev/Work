@@ -2,20 +2,20 @@ package Homework;
 
 public class Main {
     public static void main(String[] args) {
-        Phone phone = new Phone();
+        BasicPhone phone = new BasicPhone();
         phone.model = 11;
         phone.number = 89275868686L;
         phone.weight = 100;
-        phone.info();
+        phone.displayInfo();
 
-        Phone1 phone1 = new Phone1();
-        phone1.setName("Игооррьь");
+        CallablePhone phone1 = new CallablePhone();
+        phone1.setName("Игорь");
         phone1.receiveCall();
 
         phone1.setNumber(phone.number);
         System.out.println(phone1.getNumber());
 
-        Phone2 phone2 = new Phone2(phone.model, phone.number, phone.weight);
+        PhoneSpecs phone2 = new PhoneSpecs(phone.model, phone.number, phone.weight);
         System.out.println(phone2.getModel() + " " + phone2.getNumber() + " " + phone2.getWeight());
 
 

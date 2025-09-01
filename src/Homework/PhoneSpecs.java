@@ -1,6 +1,6 @@
 package Homework;
 
-public class Phone2 {
+public class PhoneSpecs {
     private int model;
     private long number;
     private int weight;
@@ -14,7 +14,7 @@ public class Phone2 {
     public int getWeight() {
         return weight;
     }
-    public Phone2(int model, long number, int weight) {
+    public PhoneSpecs(int model, long number, int weight) {
         this.model = model;
         this.number = number;
         this.weight = weight;

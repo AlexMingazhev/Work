@@ -1,6 +1,6 @@
 package Homework;
 
-public class Phone1 {
+public class CallablePhone {
 
 
 

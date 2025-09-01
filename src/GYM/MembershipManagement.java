@@ -65,14 +65,10 @@ public class MembershipManagement {
         if(club != 4) {
             cal = (n) -> {
                 switch (n) {
-                    case 1:
-                        return 900;
-                    case 2:
-                        return 950;
-                    case 3:
-                        return 1000;
-                    default:
-                        return -1;
+                    case 1: return 900;   // Club Mercury
+                    case 2: return 950;   // Club Neptune
+                    case 3: return 1000;  // Club Jupiter
+                    default: return -1;
                 }
             };
             fees = cal.calculateFees(club);
@@ -80,15 +76,13 @@ public class MembershipManagement {
             m.add(mbr);
             mem = mbr.toString();
             System.out.println("\nSingle Club посетитель добавлен\n");
-        }else {
+        } else {
             cal = (n) -> {
-                if (n == 4)
-                    return 1200;
-                else
-                    return -1;
+                if (n == 4) return 1200;  // Multi Club
+                else return -1;
             };
             fees = cal.calculateFees(club);
-            mbr = new MultiClubMember('M', memberID, name, fees,100);
+            mbr = new MultiClubMember('M', memberID, name, fees, 100); // 100 points as per requirements
             m.add(mbr);
             mem = mbr.toString();
             System.out.println("\nMulti Club посетитель добавлен\n");
@@ -111,24 +105,25 @@ public class MembershipManagement {
         }
         System.out.println("\nИдентификатор посетителя не найден\n");
     }
-    public void printMemberInfo(LinkedList<Member> m){
+    public void printMemberInfo(LinkedList<Member> m) {
         int memberID;
 
         System.out.print("\nВведите идентификатор посетителя, чтобы отобразить информацию: ");
         memberID = getIntInput();
 
-        for (int i = 0; i<m.size(); i++){
-            if(m.get(i).getMemberID() == memberID){
-                String[] memberInfo = m.get(i).toString().split(", ");
-                System.out.println("\n\nMember Type = " + memberInfo[0]);
-                System.out.println("Member ID = " + memberInfo[1]);
-                System.out.println("Member Name = " + memberInfo[2]);
-                System.out.println("Membership Fees = " + memberInfo[3]);
+        for (Member member : m) {
+            if (member.getMemberID() == memberID) {
+                System.out.println("\n\nMember Type = " + member.getMemberType());
+                System.out.println("Member ID = " + member.getMemberID());
+                System.out.println("Member Name = " + member.getName());
+                System.out.println("Membership Fees = " + member.getFees());
 
-                if(memberInfo[0].equals("S")) {
-                    System.out.println("Club ID = " + memberInfo[4]);
-                }else {
-                    System.out.println("Membership Points = " + memberInfo[4]);
+                if (member instanceof SingleClubMember) {
+                    SingleClubMember scm = (SingleClubMember) member;
+                    System.out.println("Club ID = " + scm.getClub());
+                } else if (member instanceof MultiClubMember) {
+                    MultiClubMember mcm = (MultiClubMember) member;
+                    System.out.println("Membership Points = " + mcm.getMembershipPoints());
                 }
                 return;
             }

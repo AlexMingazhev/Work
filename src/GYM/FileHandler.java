@@ -8,20 +8,26 @@ public class FileHandler {
         String lineRead;
         String[] splitLine;
         Member mem;
+
         try (BufferedReader reader = new BufferedReader(new FileReader("members.csv"))){
             lineRead = reader.readLine();
             while (lineRead != null){
-                splitLine = lineRead.split(", ");
+                splitLine = lineRead.split(","); // Изменено на разделение только по запятой
                 if (splitLine[0].equals("S")){
-                    mem = new SingleClubMember('S',Integer.parseInt(splitLine[1]), splitLine[2], Double.parseDouble(splitLine[3]), Integer.parseInt(splitLine[4]));
-                }else {
-                    mem = new MultiClubMember('M',Integer.parseInt(splitLine[1]), splitLine[2],Double.parseDouble(splitLine[3]), Integer.parseInt(splitLine[4]));
+                    mem = new SingleClubMember('S', Integer.parseInt(splitLine[1]),
+                            splitLine[2], Double.parseDouble(splitLine[3]),
+                            Integer.parseInt(splitLine[4]));
+                } else {
+                    mem = new MultiClubMember('M', Integer.parseInt(splitLine[1]),
+                            splitLine[2], Double.parseDouble(splitLine[3]),
+                            Integer.parseInt(splitLine[4]));
                 }
                 m.add(mem);
                 lineRead = reader.readLine();
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());}
+            System.out.println(e.getMessage());
+        }
         return m;
     }
     public void appendFile(String mem){
@@ -38,17 +44,25 @@ public class FileHandler {
                 s = m.get(i).toString();
                 writer.write(s + "\n");
             }
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        } catch (IOException e){
+            System.out.println("Ошибка при записи временного файла: " + e.getMessage());
+            return;
         }
+
         try {
             File f = new File("members.csv");
             File tf = new File("members.temp");
 
-            f.delete();
-            tf.renameTo(f);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+            if (!f.delete()) {
+                System.out.println("Не удалось удалить исходный файл");
+                return;
+            }
+
+            if (!tf.renameTo(f)) {
+                System.out.println("Не удалось переименовать временный файл");
+            }
+        } catch (Exception e){
+            System.out.println("Ошибка при замене файлов: " + e.getMessage());
         }
     }
 }
